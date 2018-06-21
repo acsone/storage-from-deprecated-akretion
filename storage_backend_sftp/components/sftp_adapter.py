@@ -6,6 +6,7 @@
 import logging
 import os
 import errno
+from StringIO import StringIO
 
 from contextlib import contextmanager
 from odoo.addons.component.core import Component
@@ -35,7 +36,12 @@ def sftp(backend):
     account = backend._get_keychain_account()
     password = account._get_password()
     transport = paramiko.Transport((backend.sftp_server, backend.sftp_port))
-    transport.connect(username=backend.sftp_login, password=password)
+    if backend.sftp_auth_method == 'pwd':
+        transport.connect(username=backend.sftp_login, password=password)
+    elif backend.sftp_auth_method == 'ssh_key':
+        ssh_key_buffer = StringIO(password)
+        private_key = paramiko.RSAKey.from_private_key(ssh_key_buffer)
+        transport.connect(username="akeneo", pkey=private_key)
     client = paramiko.SFTPClient.from_transport(transport)
     yield client
     transport.close()
