@@ -6,13 +6,13 @@
 {
     "name": "Storage File",
     "summary": "Storage file in storage backend",
-    "version": "10.0.1.1.0",
+    "version": "9.0.1.1.0",
     "category": "Storage",
     "website": "www.akretion.com",
     "author": " Akretion",
     "license": "AGPL-3",
     "application": False,
-    "installable": False,
+    "installable": True,
     "external_dependencies": {"python": ["slugify"], "bin": []},
     "depends": ["storage_backend"],
     "data": [

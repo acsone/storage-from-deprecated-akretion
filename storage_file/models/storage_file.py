@@ -10,10 +10,10 @@ import mimetypes
 import os
 import re
 
-from odoo import api, fields, models
-from odoo.exceptions import UserError
-from odoo.tools import human_size
-from odoo.tools.translate import _
+from openerp import api, fields, models
+from openerp.exceptions import UserError
+from openerp.tools import human_size
+from openerp.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
@@ -80,6 +80,7 @@ class StorageFile(models.Model):
         ),
     ]
 
+    @api.multi
     def write(self, vals):
         if "data" in vals:
             for record in self:
@@ -172,6 +173,7 @@ class StorageFile(models.Model):
             mime, enc = mimetypes.guess_type(rec.name)
             rec.mimetype = mime
 
+    @api.multi
     def unlink(self):
         if self._context.get("cleanning_storage_file"):
             super(StorageFile, self).unlink()

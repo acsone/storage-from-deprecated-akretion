@@ -6,8 +6,8 @@
 import base64
 
 import urlparse
-from odoo.addons.component.tests.common import TransactionComponentCase
-from odoo.exceptions import AccessError, UserError
+from openerp.addons.component.tests.common import TransactionComponentCase
+from openerp.exceptions import AccessError, UserError
 
 
 class StorageFileCase(TransactionComponentCase):
@@ -91,9 +91,7 @@ class StorageFileCase(TransactionComponentCase):
 
     def test_read_bin_size(self):
         stfile = self._create_storage_file()
-        self.assertEqual(
-            stfile.with_context(bin_size=True).data, "21.00 bytes"
-        )
+        self.assertEqual(stfile.with_context(bin_size=True).data, 21)
 
     def test_cannot_update_data(self):
         stfile = self._create_storage_file()
