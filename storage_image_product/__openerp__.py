@@ -6,12 +6,12 @@
 {
     "name": "Storage Image Product",
     "summary": "Link images to products and categories",
-    "version": "10.0.2.0.0",
+    "version": "9.0.2.0.0",
     "category": "Storage",
     "website": "www.akretion.com",
     "author": " Akretion",
     "license": "AGPL-3",
-    "installable": False,
+    "installable": True,
     "depends": ["storage_image", "product", "sale"],  # only for the menu
     "data": [
         "security/ir.model.access.csv",
