@@ -6,7 +6,7 @@
 import logging
 import os
 
-from odoo import api, fields, models
+from openerp import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -24,6 +24,7 @@ class StorageMedia(models.Model):
     file_id = fields.Many2one(
         "storage.file", "File", required=True, ondelete="cascade"
     )
+    data = fields.Binary(related="file_id.data")
     media_type_id = fields.Many2one("storage.media.type", "Media Type")
 
     @api.onchange("name")
