@@ -7,7 +7,7 @@
 import logging
 import os
 
-from odoo import api, fields, models
+from openerp import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -27,6 +27,7 @@ class StorageImage(models.Model):
     file_id = fields.Many2one(
         "storage.file", "File", required=True, ondelete="cascade"
     )
+    data = fields.Binary(related="file_id.data")
 
     @api.onchange("name")
     def onchange_name(self):
@@ -63,6 +64,7 @@ class StorageImage(models.Model):
             )
         )
 
+    @api.multi
     def unlink(self):
         files = self.mapped("file_id")
         thumbnails = self.mapped("thumbnail_ids")

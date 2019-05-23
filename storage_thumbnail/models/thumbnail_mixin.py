@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
-from odoo import api, fields, models
+from openerp import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -36,7 +36,8 @@ class ThumbnailMixing(models.AbstractModel):
     def get_or_create_thumbnail(self, size_x, size_y, url_key=None):
         self.ensure_one()
         # preserve the prefetch when changing context
-        self = self.with_context(bin_size=False).with_prefetch(self._prefetch)
+        self = self.with_context(bin_size=False)
+        self.env.prefetch[self._name].update(self.ids)
         if url_key:
             url_key = slugify(url_key)
         thumbnail = self.env["storage.thumbnail"].browse()

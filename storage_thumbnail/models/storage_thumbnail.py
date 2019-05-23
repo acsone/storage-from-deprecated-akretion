@@ -7,8 +7,8 @@
 import logging
 
 import requests
-from odoo import api, fields, models
-from odoo.tools import image_resize_image
+from openerp import api, fields, models
+from openerp.tools import image_resize_image
 
 _logger = logging.getLogger(__name__)
 
@@ -26,6 +26,7 @@ class StorageThumbnail(models.Model):
     file_id = fields.Many2one(
         "storage.file", "File", required=True, ondelete="cascade"
     )
+    data = fields.Binary(related="file_id.data")
     res_model = fields.Char(readonly=False, index=True)
     res_id = fields.Integer(readonly=False, index=True)
 
@@ -82,6 +83,7 @@ class StorageThumbnail(models.Model):
         )
         return super(StorageThumbnail, self).create(vals)
 
+    @api.multi
     def unlink(self):
         files = self.mapped("file_id")
         result = super(StorageThumbnail, self).unlink()
