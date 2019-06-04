@@ -11,7 +11,7 @@ from odoo.addons.component.tests.common import SavepointComponentCase
 class ProductImageCommonCase(SavepointComponentCase):
     def _get_image(self, name):
         path = os.path.dirname(os.path.abspath(__file__))
-        with open(os.path.join(path, "static", name), 'rb') as f:
+        with open(os.path.join(path, "static", name), "rb") as f:
             content = base64.b64encode(f.read())
         return content
 

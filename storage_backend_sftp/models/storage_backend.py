@@ -27,10 +27,10 @@ class StorageBackend(models.Model):
         base_fields = super()._server_env_fields
         sftp_fields = {
             "sftp_server": {},
-            "sftp_port": {'getter': "getint"},
+            "sftp_port": {"getter": "getint"},
             "sftp_login": {},
             "sftp_password": {},
-            "sftp_auth_method": {}
+            "sftp_auth_method": {},
         }
         sftp_fields.update(base_fields)
         return sftp_fields

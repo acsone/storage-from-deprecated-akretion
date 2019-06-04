@@ -57,9 +57,9 @@ class StorageImage(models.Model):
         Overload this method if you need something more powerfull
         """
         return int(
-            self.env["ir.config_parameter"].sudo().get_param(
-                "storage.image.backend_id"
-            )
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("storage.image.backend_id")
         )
 
     def unlink(self):

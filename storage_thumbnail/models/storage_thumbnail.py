@@ -29,8 +29,10 @@ class StorageThumbnail(models.Model):
     res_id = fields.Integer(readonly=False, index=True)
 
     def _prepare_thumbnail(self, image, size_x, size_y, url_key):
-        image_resize_format = self.env["ir.config_parameter"].sudo().get_param(
-            "storage.image.resize.format"
+        image_resize_format = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("storage.image.resize.format")
         )
         if image_resize_format:
             extension = image_resize_format
@@ -48,8 +50,10 @@ class StorageThumbnail(models.Model):
         }
 
     def _resize(self, image, size_x, size_y, fmt):
-        image_resize_server = self.env["ir.config_parameter"].sudo().get_param(
-            "storage.image.resize.server"
+        image_resize_server = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("storage.image.resize.server")
         )
         if image_resize_server and image.backend_id.served_by != "odoo":
             values = {
@@ -69,9 +73,9 @@ class StorageThumbnail(models.Model):
         Overload this method if you need something more powerfull
         """
         return int(
-            self.env["ir.config_parameter"].sudo().get_param(
-                "storage.thumbnail.backend_id"
-            )
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("storage.thumbnail.backend_id")
         )
 
     @api.model

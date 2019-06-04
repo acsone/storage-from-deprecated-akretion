@@ -3,8 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
-
 import urllib.parse
+
 from odoo.addons.component.tests.common import TransactionComponentCase
 from odoo.exceptions import AccessError, UserError
 
@@ -50,8 +50,7 @@ class StorageFileCase(TransactionComponentCase):
         self.assertEqual(stfile.extension, ".txt")
         self.assertEqual(stfile.filename, "test of my_file")
         self.assertEqual(
-            stfile.relative_path,
-            "13/1322d9ccb3d257095185b205eadc9307aae5dc84",
+            stfile.relative_path, "13/1322d9ccb3d257095185b205eadc9307aae5dc84"
         )
 
     def test_missing_name_strategy(self):

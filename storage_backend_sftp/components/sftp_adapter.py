@@ -6,9 +6,9 @@ import errno
 import logging
 import os
 from contextlib import contextmanager
+from io import StringIO
 
 from odoo.addons.component.core import Component
-from io import StringIO
 
 logger = logging.getLogger(__name__)
 

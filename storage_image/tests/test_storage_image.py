@@ -4,9 +4,9 @@
 
 import base64
 import os
+import urllib.parse
 
 import requests_mock
-import urllib.parse
 from odoo.addons.component.tests.common import TransactionComponentCase
 from odoo.exceptions import AccessError
 
@@ -27,7 +27,7 @@ class StorageImageCase(TransactionComponentCase):
 
         self.backend = self.env.ref("storage_backend.default_storage_backend")
         path = os.path.dirname(os.path.abspath(__file__))
-        with open(os.path.join(path, "static/akretion-logo.png"), 'rb') as f:
+        with open(os.path.join(path, "static/akretion-logo.png"), "rb") as f:
             data = f.read()
             self.filesize = len(data)
             self.filedata = base64.b64encode(data)
