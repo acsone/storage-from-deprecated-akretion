@@ -26,7 +26,6 @@ class StorageThumbnail(models.Model):
     file_id = fields.Many2one(
         "storage.file", "File", required=True, ondelete="cascade"
     )
-    data = fields.Binary(related="file_id.data")
     res_model = fields.Char(readonly=False, index=True)
     res_id = fields.Integer(readonly=False, index=True)
 

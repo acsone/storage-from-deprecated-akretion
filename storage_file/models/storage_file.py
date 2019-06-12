@@ -58,9 +58,11 @@ class StorageFile(models.Model):
     )
     data = fields.Binary(
         help="Datas",
-        inverse="_inverse_data",
-        compute="_compute_data",
-        store=False,
+        attachment=True,
+        # HARDCODED FOR SILOG TO AVOID BUG WITH ORM IN 9.0
+        # inverse="_inverse_data",
+        # compute="_compute_data",
+        # store=False,
     )
     to_delete = fields.Boolean()
     active = fields.Boolean(default=True)

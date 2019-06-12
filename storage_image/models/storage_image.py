@@ -27,7 +27,6 @@ class StorageImage(models.Model):
     file_id = fields.Many2one(
         "storage.file", "File", required=True, ondelete="cascade"
     )
-    data = fields.Binary(related="file_id.data")
 
     @api.onchange("name")
     def onchange_name(self):
