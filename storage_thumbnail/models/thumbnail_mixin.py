@@ -35,8 +35,6 @@ class ThumbnailMixing(models.AbstractModel):
 
     def get_or_create_thumbnail(self, size_x, size_y, url_key=None):
         self.ensure_one()
-        # preserve the prefetch when changing context
-        self = self.with_context(bin_size=False).with_prefetch(self._prefetch)
         if url_key:
             url_key = slugify(url_key)
         thumbnail = self.env["storage.thumbnail"].browse()
@@ -47,8 +45,11 @@ class ThumbnailMixing(models.AbstractModel):
                 thumbnail = th
                 break
         if not thumbnail and self.data:
+            # We only need real data when we have to create thumbnail
+            self_data = self.with_context(bin_size=False).with_prefetch(
+                self._prefetch)
             vals = self.env["storage.thumbnail"]._prepare_thumbnail(
-                self, size_x, size_y, url_key
+                self_data, size_x, size_y, url_key
             )
             # use the relation to create the thumbnail to be sure that the
             # record is added to the cache of this relation.
